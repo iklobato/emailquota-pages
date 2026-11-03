@@ -1,8 +1,12 @@
 name = "emailquota"
 main = "index.js"
-type = "javascript"
 account_id = "d5f9f92a2be31d581d4d1d3f4796bd58"
+compatibility_date = "2026-11-03"
 
-routes = [
-  { pattern = "emailquota.cc/*", zone_id = "3e3327c2dc1d65ae245433f6d93d0a71" }
-]
+[[kv_namespaces]]
+binding = "EMAILQUOTA"
+id = "e5249e3743f64997858db4b871ce91c3"
+
+[[routes]]
+pattern = "emailquota.cc/*"
+zone_id = "3e3327c2dc1d65ae245433f6d93d0a71"
